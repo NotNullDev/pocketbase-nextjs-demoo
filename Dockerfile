@@ -6,7 +6,7 @@ RUN mkdir -p /root/pocketbase/pb_data
 
 COPY ./pocketbase .
 
-RUN chown +x ./pocketbase
+RUN chmod +x ./pocketbase
 
 RUN ls -a
 
