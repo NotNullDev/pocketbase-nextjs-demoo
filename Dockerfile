@@ -7,9 +7,9 @@ COPY ./pocketbase/pb_data /root/pocketbase/pb_data
 
 COPY ./pocketbase .
 
-ARG POCKETBASE_PORT=8080
+EXPOSE 8080
 
-EXPOSE ${POCKETBASE_PORT}
+RUN ls
 
 # start PocketBase
-CMD ["./entrypoint.sh"]
+CMD ["./pocketbase", "serve", "http=0.0.0.0:8080"]
