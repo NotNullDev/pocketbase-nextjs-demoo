@@ -12,4 +12,4 @@ EXPOSE 8080
 RUN ls
 
 # start PocketBase
-CMD ["./pocketbase", "serve", "http=0.0.0.0:8080"]
+ENTRYPOINT ["./pocketbase", "serve", "http=0.0.0.0:8080"]
