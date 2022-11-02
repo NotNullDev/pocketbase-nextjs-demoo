@@ -9,7 +9,10 @@ COPY ./pocketbase .
 
 ARG POCKETBASE_PORT=8080
 
+
 EXPOSE ${POCKETBASE_PORT}
+
+RUN ls
 
 # start PocketBase
 CMD ["./entrypoint.sh"]
