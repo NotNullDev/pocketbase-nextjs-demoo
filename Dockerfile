@@ -3,14 +3,13 @@ FROM ubuntu:22.04
 WORKDIR /root/pocketbase
 
 RUN mkdir -p /root/pocketbase/pb_data
+COPY ./pocketbase/pb_data /root/pocketbase/pb_data
 
 COPY ./pocketbase .
 
-RUN chmod +x ./pocketbase
+ARG POCKETBASE_PORT=8080
 
-RUN ls -a
-
-EXPOSE 8080
+EXPOSE ${POCKETBASE_PORT}
 
 # start PocketBase
-ENTRYPOINT ["./pocketbase", "serve", "http=0.0.0.0:8080"]
+CMD ["./entrypoint.sh"]
