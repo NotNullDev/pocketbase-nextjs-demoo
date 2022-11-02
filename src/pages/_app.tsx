@@ -24,6 +24,9 @@ function Header() {
       <button className="btn btn-ghost" onClick={() => router.push("/")}>
         Home
       </button>
+      <button className="btn btn-ghost" onClick={() => router.push("/files")}>
+        Files
+      </button>
     </div>
   );
 }
