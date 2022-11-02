@@ -1,0 +1,199 @@
+[
+  {
+    "id": "systemprofiles0",
+    "name": "profiles",
+    "system": true,
+    "listRule": "userId = @request.user.id",
+    "viewRule": "userId = @request.user.id",
+    "createRule": "userId = @request.user.id",
+    "updateRule": "userId = @request.user.id",
+    "deleteRule": null,
+    "schema": [
+      {
+        "id": "pbfielduser",
+        "name": "userId",
+        "type": "user",
+        "system": true,
+        "required": true,
+        "unique": true,
+        "options": {
+          "maxSelect": 1,
+          "cascadeDelete": true
+        }
+      },
+      {
+        "id": "pbfieldname",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "pbfieldavatar",
+        "name": "avatar",
+        "type": "file",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 5242880,
+          "mimeTypes": [
+            "image/jpg",
+            "image/jpeg",
+            "image/png",
+            "image/svg+xml",
+            "image/gif"
+          ],
+          "thumbs": null
+        }
+      }
+    ]
+  },
+  {
+    "id": "0ux2xum5cstqezk",
+    "name": "posts",
+    "system": false,
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "schema": [
+      {
+        "id": "cyztzdb2",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "smhbucpj",
+        "name": "content",
+        "type": "text",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ]
+  },
+  {
+    "id": "ss5xoaz797j3dpn",
+    "name": "messages",
+    "system": false,
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "schema": [
+      {
+        "id": "ocaqj3tu",
+        "name": "content",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      }
+    ]
+  },
+  {
+    "id": "1t8eijvlqwu9pk1",
+    "name": "channels",
+    "system": false,
+    "listRule": null,
+    "viewRule": null,
+    "createRule": null,
+    "updateRule": null,
+    "deleteRule": null,
+    "schema": [
+      {
+        "id": "clppnl6c",
+        "name": "channel_name",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "mrpi0hzp",
+        "name": "active_users",
+        "type": "relation",
+        "system": false,
+        "required": false,
+        "unique": false,
+        "options": {
+          "maxSelect": 5000,
+          "collectionId": "ss5xoaz797j3dpn",
+          "cascadeDelete": false
+        }
+      }
+    ]
+  },
+  {
+    "id": "9fa5ic27olsal31",
+    "name": "files",
+    "system": false,
+    "listRule": "",
+    "viewRule": "",
+    "createRule": "",
+    "updateRule": "",
+    "deleteRule": "",
+    "schema": [
+      {
+        "id": "snr1luf1",
+        "name": "name",
+        "type": "text",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "min": null,
+          "max": null,
+          "pattern": ""
+        }
+      },
+      {
+        "id": "a2n5kzkz",
+        "name": "field",
+        "type": "file",
+        "system": false,
+        "required": true,
+        "unique": false,
+        "options": {
+          "maxSelect": 1,
+          "maxSize": 5000000000,
+          "mimeTypes": [],
+          "thumbs": []
+        }
+      }
+    ]
+  }
+]

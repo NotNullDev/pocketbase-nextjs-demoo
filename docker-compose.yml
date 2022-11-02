@@ -1,0 +1,24 @@
+services:
+  pocketbase:
+    container_name: pocketbase
+    build:
+      context: ./pocketbase
+    image: nnd/pocketbase
+    ports:
+      - "8080:8080"
+    networks:
+      - pocketbase
+    volumes:
+      - pocketbase:/root/pocketbase:rw
+
+volumes:
+  pocketbase:
+    name: pocketbase
+
+networks:
+  pocketbase:
+    name: pocketbase
+
+configs:
+  config1:
+    file: .env
