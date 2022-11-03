@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 
 WORKDIR /root/pocketbase
+RUN apt update && apt install ca-certificates
 
 RUN mkdir -p /root/pocketbase/pb_data
 
