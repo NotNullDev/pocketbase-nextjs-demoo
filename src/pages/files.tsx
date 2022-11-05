@@ -80,21 +80,26 @@ export default function FileUploadPage() {
   }
 
   return (
-    <>
-      <div>File upload</div>
+    <div className="flex flex-col items-center gap-3">
+      <h1 className="text-2xl">File upload</h1>
       <div className="flex gap-2 items-center">
-        <label>Filename: </label>
         <input
           type="text"
           className="input input-bordered"
+          placeholder="Filename"
           ref={fileNameInputRef}
         />
       </div>
-      <input
-        type="file"
-        className="file-input file-input-bordered"
-        ref={fileInputRef}
-      />
+      <div className="flex gap-2">
+        <input
+          type="file"
+          className="file-input file-input-bordered"
+          ref={fileInputRef}
+        />
+        <button className="btn glass" onClick={() => uploadFile()}>
+          Upload
+        </button>
+      </div>
       <div>
         <div>Uploaded files:</div>
         <div className="border w-[500px] h-[300px]">
@@ -110,6 +115,6 @@ export default function FileUploadPage() {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }

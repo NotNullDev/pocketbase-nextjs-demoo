@@ -7,6 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className="min-w-screen min-h-screen flex flex-col">
       <Toaster
+        position="top-right"
         toastOptions={{
           className: "alert alert-info",
         }}
@@ -29,6 +30,15 @@ function Header() {
       </button>
       <button className="btn btn-ghost" onClick={() => router.push("/login")}>
         Login
+      </button>
+      <button className="btn btn-ghost" onClick={() => router.push("/logs")}>
+        Logs
+      </button>
+      <button
+        className="btn btn-ghost"
+        onClick={() => router.push("/settings")}
+      >
+        Settings
       </button>
     </div>
   );

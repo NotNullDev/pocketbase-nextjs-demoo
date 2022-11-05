@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import { pocketBaseClient } from "../lib/pocketbase";
 
 export default function Home() {
@@ -11,21 +12,41 @@ export default function Home() {
       setMessages((old) => [...old, e.record.content]);
     });
 
+    (async function () {
+      try {
+        const initMessages = await pocketBaseClient.records.getFullList(
+          "messages"
+        );
+        const msgs = initMessages.map((m) => m.content);
+        console.log(msgs);
+        setMessages(msgs);
+      } catch (e) {
+        toast(e.toString());
+      }
+    })();
+
     return () => {
       pocketBaseClient.realtime.unsubscribe("messages");
     };
   }, []);
 
-
+  useEffect(() => {
+    document.querySelector("#last")?.scrollIntoView();
+  });
 
   return (
     <div className="flex-1 flex items-start mt-20 justify-center gap-3">
       <div className="flex flex-col gap-4">
         <div>Messages:</div>
-        <div className="flex flex-col w-[500px] h-[200px] overflow-y-auto border rounded border-fuchsia-400">
+        <div className="flex flex-col w-[500px] h-[200px] overflow-y-auto bg-gradient-to-bl from-violet-500 to-orange-700">
           {messages.map((m) => {
-            return <div>{m}</div>;
+            return (
+              <div className="w-1/2 bg-base-200 m-3 rounded-xl p-2 shadow-md">
+                {m}
+              </div>
+            );
           })}
+          <div id="last"></div>
         </div>
         <form key={messages.length}>
           <input ref={inputRef} className="input input-bordered" />
