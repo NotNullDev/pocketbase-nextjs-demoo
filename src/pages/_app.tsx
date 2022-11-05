@@ -5,7 +5,7 @@ import "../styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className="min-w-screen min-h-screen flex flex-col">
+    <div className="min-w-screen min-h-screen flex flex-col transition-all duration-1000">
       <Toaster
         position="top-right"
         toastOptions={{

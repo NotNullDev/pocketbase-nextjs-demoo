@@ -4,25 +4,32 @@ import { pocketBaseClient } from "../lib/pocketbase";
 
 export default function LogsPage() {
   const [logs, setLogs] = useState<any[]>([]);
+
+  async function fetchLogs() {
+    try {
+      const resp = await pocketBaseClient.logs.getRequestsList(1, 50000, {
+        sort: "-created",
+      });
+      setLogs(resp.items);
+    } catch (e) {
+      toast("error during receiving logs");
+    }
+  }
+
   useEffect(() => {
-    (async function () {
-      try {
-        const resp = await pocketBaseClient.logs.getRequestsList(1, 20);
-        setLogs(resp.items);
-        console.log(resp.items);
-        pocketBaseClient.realtime.subscribe("logs", (data) => {
-          toast(JSON.stringify(data.record, undefined, 2));
-        });
-        toast("wtf");
-      } catch (e) {
-        toast("error during receiving logs");
-      }
-    })();
+    fetchLogs();
   }, []);
+
+  useEffect(() => {
+    document.querySelector("#last")?.scrollIntoView();
+  });
 
   return (
     <div className="flex flex-col items-center mt-5 gap-3">
       <h1>Logs:</h1>
+      <button onClick={() => fetchLogs()} className="btn btn-primary">
+        refresh
+      </button>
       <section className="bg-base-200 w-[80vw] h-[70vh] p-4 rounded-xl overflow-auto">
         {logs &&
           logs.map((log) => {
@@ -33,6 +40,7 @@ export default function LogsPage() {
             );
           })}
         {!logs && <div>loading...</div>}
+        <div id="last"></div>
       </section>
     </div>
   );

@@ -38,7 +38,7 @@ export default function Home() {
     <div className="flex-1 flex items-start mt-20 justify-center gap-3">
       <div className="flex flex-col gap-4">
         <div>Messages:</div>
-        <div className="flex flex-col w-[500px] h-[200px] overflow-y-auto bg-gradient-to-bl from-violet-500 to-orange-700">
+        <div className="flex flex-col w-[500px] h-[200px] overflow-y-auto bg-gradient-to-bl from-violet-500 to-orange-700 rounded-xl">
           {messages.map((m) => {
             return (
               <div className="w-1/2 bg-base-200 m-3 rounded-xl p-2 shadow-md">
