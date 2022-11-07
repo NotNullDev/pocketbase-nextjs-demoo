@@ -1,20 +1,17 @@
 import { useRouter } from "next/router";
-import { Admin, User } from "pocketbase";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { pocketBaseClient } from "../lib/pocketbase";
+import { useUserStore } from "../lib/userStore";
 
 export default function LoginPage() {
-  const router = useRouter();
-  const [user, setUser] = useState<User | Admin | undefined>();
-  const usernameInputRef = useRef();
-  const passwordInputRef = useRef();
+  const currentUser = useUserStore((state) => state.user);
+  const setCurrentUser = useUserStore((state) => state.setUser);
+  const logout = useUserStore((state) => state.logout);
 
-  useEffect(() => {
-    if (pocketBaseClient.authStore.model) {
-      setUser(pocketBaseClient.authStore.model);
-    }
-  }, []);
+  const router = useRouter();
+  const usernameInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const { code } = router.query;
 
@@ -81,9 +78,7 @@ export default function LoginPage() {
           <button
             className="btn btn-error"
             onClick={async () => {
-              const resp = await pocketBaseClient.authStore.clear();
-
-              setUser(undefined);
+              logout();
             }}
           >
             Logout
@@ -108,13 +103,11 @@ export default function LoginPage() {
               toast("auth started");
               try {
                 const resp = await pocketBaseClient.admins.authViaEmail(
-                  usernameInputRef.current?.value,
-                  passwordInputRef.current?.value
+                  usernameInputRef.current?.value ?? "",
+                  passwordInputRef.current?.value ?? ""
                 );
-                setUser(resp.user);
               } catch (e) {
                 toast("auth failed, trying to create account");
-                toast(e.toString());
                 console.log(e);
                 try {
                   const resp1 = await pocketBaseClient.admins.create({
@@ -122,10 +115,8 @@ export default function LoginPage() {
                     password: passwordInputRef.current?.value,
                     passwordConfirm: passwordInputRef.current?.value,
                   });
-                  setUser(resp1);
                 } catch (e1) {
                   toast("account creation failed");
-                  toast(e1.toString());
                   console.log(e1);
                 }
               }
@@ -137,12 +128,12 @@ export default function LoginPage() {
         </form>
 
         <div>
-          {user && (
+          {currentUser && (
             <div>
               <h2>User info:</h2>
-              <div>ID: {user.id}</div>
-              <div>Email: {user.email}</div>
-              <div>Created at: {user.created}</div>
+              <div>ID: {currentUser.id}</div>
+              <div>Email: {currentUser.email}</div>
+              <div>Created at: {currentUser.created}</div>
             </div>
           )}
         </div>

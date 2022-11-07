@@ -9,8 +9,8 @@ type FileType = {
 
 export default function FileUploadPage() {
   const [files, setFiles] = useState<FileType[]>([]);
-  const fileNameInputRef = useRef<HTMLInputElement>();
-  const fileInputRef = useRef<HTMLInputElement>();
+  const fileNameInputRef = useRef<HTMLInputElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (fileInputRef.current) {

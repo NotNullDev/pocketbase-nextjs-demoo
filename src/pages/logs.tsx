@@ -7,6 +7,9 @@ export default function LogsPage() {
 
   async function fetchLogs() {
     try {
+      if (!pocketBaseClient.authStore.model) {
+        return;
+      }
       const resp = await pocketBaseClient.logs.getRequestsList(1, 50000, {
         sort: "-created",
       });
@@ -23,6 +26,10 @@ export default function LogsPage() {
   useEffect(() => {
     document.querySelector("#last")?.scrollIntoView();
   });
+
+  if (!pocketBaseClient.authStore.model) {
+    return <div>You must be logged in!</div>;
+  }
 
   return (
     <div className="flex flex-col items-center mt-5 gap-3">

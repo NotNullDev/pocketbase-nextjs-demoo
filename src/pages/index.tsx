@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import toast from "react-hot-toast";
 import { pocketBaseClient } from "../lib/pocketbase";
 
 export default function Home() {
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [messages, setMessages] = useState<string[]>([]);
 
   useEffect(() => {
@@ -21,7 +20,7 @@ export default function Home() {
         console.log(msgs);
         setMessages(msgs);
       } catch (e) {
-        toast(e.toString());
+        console.log(e);
       }
     })();
 

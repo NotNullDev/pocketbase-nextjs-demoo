@@ -4,9 +4,13 @@ import { pocketBaseClient } from "../lib/pocketbase";
 
 export default function SettingsPage() {
   const [settings, setSeeings] = useState<any>();
+
   useEffect(() => {
     (async function () {
       try {
+        if (!pocketBaseClient.authStore.model) {
+          return;
+        }
         const resp = await pocketBaseClient.settings.getAll();
         console.log(resp);
         toast("ok!");
@@ -16,6 +20,10 @@ export default function SettingsPage() {
       }
     })();
   }, []);
+
+  if (!pocketBaseClient.authStore.model) {
+    return <div>You must be logged in!</div>;
+  }
 
   return (
     <div className="flex flex-col items-center">
